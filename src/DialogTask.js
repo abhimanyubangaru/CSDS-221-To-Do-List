@@ -58,7 +58,7 @@ export default function DialogTask(props) {
 
   //when hit the cancel button
   let closeDialog = () => {
-    props.parentCallBack({
+    props.parentCallback({
       action: 'cancel',
       task: {},
     });
@@ -71,7 +71,7 @@ export default function DialogTask(props) {
       validatePriority &&
       deadline
     ) {
-      props.parentCallBack({
+      props.parentCallback({
         action: 'submit',
         task: {
           title: title,
@@ -87,7 +87,7 @@ export default function DialogTask(props) {
 
   let updateTask = () => {
     if (!validateDescription() && validatePriority() && deadline) {
-      props.parentCallBack({
+      props.parentCallback({
         action: 'edit',
         task: {
           title: title,
@@ -184,7 +184,7 @@ export default function DialogTask(props) {
                 margin="dense"
                 label="Deadline"
                 value={props.deadline}
-                onChange={(newValue) => setEntry(newValue)}
+                onChange={(newValue) => setDeadline(newValue)}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
