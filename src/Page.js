@@ -177,7 +177,9 @@ export default class Page extends Component {
                       </TableCell>
                       <TableCell align="center">
                        {!thisTask.checked && <Button variant="contained" sx={{width : 100}} onClick={() => this.editTask(index)}>
-                         
+                       <EditIcon fontSize="small" />
+                                &nbsp;Update
+                              </Button>
                          }
                       </TableCell>
                     </TableRow>
