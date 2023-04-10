@@ -4,7 +4,6 @@ import CardHeader from '@mui/material/CardHeader';
 import TableBody from '@mui/material/TableBody';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
-import Dialog from '@mui/material/Dialog';
 import DiaWrap from '@mui/material/Dialog';
 import moment from 'moment';
 import TableContainer from '@mui/material/TableContainer';
@@ -19,6 +18,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DialogTask from './DialogTask';
 
 export default class Page extends Component {
   deleteSuccess = () => toast.success('Task successfully deleted');
@@ -121,14 +121,14 @@ export default class Page extends Component {
         ></CardHeader>
         <CardContent>
           <DiaWrap open={this.state.open} onClose={() => this.dialogCallBack()}>
-            <Dialog
+            <DialogTask
               add={this.state.add}
               index={this.state.index}
               data={this.state.data}
               dataFromParents={this.state.task}
               parentCallback={this.dialogCallback}
               tasks={this.state.tasks}
-            ></Dialog>
+            ></DialogTask>
           </DiaWrap>
           <TableContainer>
             <Table>

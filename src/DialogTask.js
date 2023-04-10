@@ -20,7 +20,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function Dialog(props) {
+export default function DialogTask(props) {
   //props
   const [add] = useState(props.add);
   let [tasks] = useState(props.tasks);
