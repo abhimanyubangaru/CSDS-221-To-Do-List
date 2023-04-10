@@ -41,7 +41,7 @@ export default class Page extends Component {
   }
 
   //add a task
-  addTask() {
+  addATask() {
     //open the dialog
     this.setState({ open: true });
     //then you need to make it an add dialog, not edit dialog
@@ -51,7 +51,7 @@ export default class Page extends Component {
   }
 
   //Edit an existing task
-  editTask(index) {
+  editThisEntry(index) {
     //open the dialog
     this.setState({ open: true });
     //then you need to make it an edit dialog, not add dialog
@@ -128,7 +128,7 @@ export default class Page extends Component {
             <>
               <Button
                 variant="contained"
-                onClick={() => this.addTask()}
+                onClick={() => this.addATask()}
                 sx={{ marginRight: '5%' }}
               >
                 <AddCircleIcon />
@@ -164,6 +164,7 @@ export default class Page extends Component {
               </TableHead>
               <TableBody>
                 {this.state.tasks.map((thisTask, index) => {
+                  console.log(thisTask); 
                   return (
                     <TableRow key={thisTask.title}>
                       <TableCell align="center">{thisTask.title}</TableCell>
@@ -183,7 +184,7 @@ export default class Page extends Component {
                       </TableCell>
                       <TableCell align="center">
                        {!thisTask.checked && <Button variant="contained" sx={{width : 100}} sx={{ width: '85%' }}
-                       onClick={() => this.editTask(index)}>
+                       onClick={() => this.editThisEntry(index)}>
                        <EditIcon fontSize="small" />
                                 &nbsp;Update
                               </Button>
