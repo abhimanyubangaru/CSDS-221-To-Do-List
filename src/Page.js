@@ -106,7 +106,7 @@ export default class Page extends Component {
             ></DialogTask>
           </DiaWrap>
         {/*HEADER*/}
-        <Card sx = {{margin '20px'}} >
+        <Card  >
         <CardHeader
           sx={{ bgcolor: 'primary.dark', color: 'white' }}
           title={
