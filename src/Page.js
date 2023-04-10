@@ -32,7 +32,7 @@ export default class Page extends Component {
       task: {
         deadline: moment()
       },
-      rows: [],
+      tasks: [],
       open: false,
       add: false,
       index: -1,
@@ -66,9 +66,9 @@ export default class Page extends Component {
 
   //used to edit a row
   editRow = (data) => {
-    let newTasks = [...this.state.rows];
-    newTasks[data.index] = data.data;
-    this.setState({ rows: newTasks });
+    let newTasks = [...this.state.tasks];
+    newTasks[data.index] = data.task;
+    this.setState({ tasks: newTasks });
   };
 
   //Callback from dialog input to see what next to do
@@ -77,12 +77,12 @@ export default class Page extends Component {
     if (data.action === 'submit') {
       console.log("reached here");
       this.addSuccess();
-      this.setState({ rows: [...this.state.rows, data.task] });
+      this.setState({ tasks: [...this.state.tasks, data.task] });
       this.handleClose();
       console.log(
         "printing tasks"
       );
-      console.log(this.state.rows)
+      console.log(this.state.tasks)
     } else if (data.action === 'cancel') {
       this.handleClose();
     } else if (data.action === 'edit') {
@@ -93,9 +93,9 @@ export default class Page extends Component {
   };
 
   toggleIsComplete = (index) => {
-    let newTasks = [...this.state.rows];
+    let newTasks = [...this.state.tasks];
     newTasks[index]['checked'] = !newTasks[index]['checked'];
-    this.setState({ rows: newTasks });
+    this.setState({ tasks: newTasks });
   };
 
   render() {
@@ -108,7 +108,7 @@ export default class Page extends Component {
               data={this.state.data}
               dataFromParents={this.state.task}
               parentCallback={this.dialogCallback}
-              tasks={this.state.rows}
+              tasks={this.state.tasks}
             ></DialogTask>
           </DiaWrap>
         {/*HEADER*/}
@@ -163,7 +163,7 @@ export default class Page extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {this.state.rows.map((thisTask, index) => {
+                {this.state.tasks.map((thisTask, index) => {
                   console.log(thisTask); 
                   return (
                     <TableRow key={thisTask.title}>
@@ -193,7 +193,7 @@ export default class Page extends Component {
                           color="error"
                           variant="contained"
                           onClick={() => {this.setState((prevState) => ({
-                            rows: [...prevState.rows.slice(0,index),...prevState.rows.slice(index+1)]
+                            tasks: [...prevState.tasks.slice(0,index),...prevState.tasks.slice(index+1)]
                           }));
                             this.deleteSuccess();
                           }}

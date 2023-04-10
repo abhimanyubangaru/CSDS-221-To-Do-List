@@ -81,7 +81,6 @@ export default function DialogTask(props) {
           deadline: deadline,
           priority: priority,
           checked: checked,
-          setChecked: setChecked,
         },
       });
       
@@ -98,7 +97,6 @@ export default function DialogTask(props) {
           deadline: deadline,
           priority: priority,
           checked: checked,
-          setChecked: setChecked,
         },
       });
     }
@@ -131,13 +129,16 @@ export default function DialogTask(props) {
       setTitleValidator('');
       setTitleError(false);
     }
-    // Check if the task title already exists in the array
-    let existingTask = tasks.find((item) => item.title === title);
-    if (existingTask && arrayTask.indexOf(existingTask) !== props.index) {
-      setTitleValidator('Title already exists!');
+
+    //Check if the task is a duplicate
+    for(let i = 0; i < tasks.length; i++){
+      if(tasks[i].title === title){
+        setTitleValidator('Title already exists!');
       err = true;
       setTitleError(true);
+      }
     }
+  
   };
 
   return (
@@ -186,7 +187,7 @@ export default function DialogTask(props) {
               <DatePicker
                 margin="dense"
                 label="Deadline"
-                value={props.deadline}
+                value={deadline}
                 onChange={(newValue) => setDeadline(newValue)}
                 renderInput={(params) => <TextField {...params} />}
               />
