@@ -131,7 +131,7 @@ export default class Page extends Component {
         }
       ></CardHeader>
       <CardContent>
-      <Dialog openState={openState} addState={addState} task={task} changeTitle={changeTitle} changeDescription={changeDescription} changeDeadline={changeDeadline} changePriority={changePriority}></Dialog>
+      <Dialog add={this.state.add} index={this.state.index} task={this.state.task} parentCallback={this.dialogCallback} tasks={this.state.tasks}></Dialog>
         <TableContainer>
           <Table>
             <TableHead>
@@ -195,7 +195,8 @@ export default class Page extends Component {
           </TableCell>
         </TableRow>
       );
-    })}</TableBody>
+    })}
+    </TableBody>
           </Table>
         </TableContainer>
       </CardContent>
@@ -212,7 +213,6 @@ export default class Page extends Component {
         pauseOnHover
       />
     </div>
-      </div>
     )
    }
 }
