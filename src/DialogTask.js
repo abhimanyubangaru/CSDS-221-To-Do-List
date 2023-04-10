@@ -89,7 +89,6 @@ export default function DialogTask(props) {
 
   let updateTask = () => {
     if (!validateDescription() && validatePriority() && deadline) {
-      console.log("YUUUH");
       props.parentCallback({
         action: 'edit',
         task: {
