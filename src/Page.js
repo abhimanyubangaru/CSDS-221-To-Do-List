@@ -36,7 +36,6 @@ export default class Page extends Component {
       open: false,
       add: false,
       index: -1,
-      data: {}
     };
   }
 
