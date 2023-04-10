@@ -175,7 +175,7 @@ export default class Page extends Component {
                         {moment(thisTask.deadline).format("MM/DD/YY")}
                       </TableCell>
                       <TableCell align="center">{thisTask.priority}</TableCell>
-                      <TableCell align="center">{thisTask.checked ? <Checkbox checked={row.checked} onChange={(e) => {this.toggleIsComplete(index)}}/> :
+                      <TableCell align="center">{thisTask.checked ? <Checkbox checked={thisTask.checked} onChange={(e) => {this.toggleIsComplete(index)}}/> :
                         <Checkbox
                           
                           checked={thisTask.checked}
@@ -183,12 +183,27 @@ export default class Page extends Component {
                         /> }
                       </TableCell>
                       <TableCell align="center">
-                       {!thisTask.checked && <Button variant="contained" sx={{width : 100}} onClick={() => this.editTask(index)}>
+                       {!thisTask.checked && <Button variant="contained" sx={{width : 100}} sx={{ width: '85%' }}
+                       onClick={() => this.editTask(index)}>
                        <EditIcon fontSize="small" />
                                 &nbsp;Update
                               </Button>
                          }
+                         <Button
+                          color="error"
+                          variant="contained"
+                          onClick={() => {this.setState((prevState) => ({
+                            rows: [...prevState.rows.slice(0,index),...prevState.rows.slice(index+1)]
+                          }));
+                            this.deleteSuccess();
+                          }}
+                          sx={{ bgcolor: 'red', width: '85%' }}
+                        >
+                          <CancelIcon fontSize="small" />
+                          &nbsp;Delete
+                        </Button>
                       </TableCell>
+
                     </TableRow>
                   );
                 })}
