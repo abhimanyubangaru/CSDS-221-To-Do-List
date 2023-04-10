@@ -28,6 +28,9 @@ export default class Page extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      task: {
+        deadline: moment(),
+      },
       tasks: [],
       open: false,
       add: false,
@@ -70,15 +73,15 @@ export default class Page extends Component {
   //Callback from dialog input to see what next to do
   dialogCallback = (data) => {
     if (data.action === 'submit') {
-      addSuccess();
+      this.addSuccess();
       this.setState({ tasks: [...this.state.tasks, data.task] });
-      handleClose();
+      this.handleClose();
     } else if (data.action === 'cancel') {
-      handleClose();
+      this.handleClose();
     } else if (data.action === 'edit') {
-      updateSuccess();
+      this.updateSuccess();
       this.editATask(data);
-      handleClose();
+      this.handleClose();
     }
   };
 
@@ -117,14 +120,14 @@ export default class Page extends Component {
           }
         ></CardHeader>
         <CardContent>
-          <DiaWrap open={this.state.open} onClose = {() -> this.dialogCallBack()}>
-          <Dialog
-            add={this.state.add}
-            index={this.state.index}
-            task={this.state.task}
-            parentCallback={this.dialogCallback}
-            tasks={this.state.tasks}
-          ></Dialog>
+          <DiaWrap open={this.state.open} onClose={() => this.dialogCallBack()}>
+            <Dialog
+              add={this.state.add}
+              index={this.state.index}
+              task={this.state.task}
+              parentCallback={this.dialogCallback}
+              tasks={this.state.tasks}
+            ></Dialog>
           </DiaWrap>
           <TableContainer>
             <Table>
@@ -166,7 +169,7 @@ export default class Page extends Component {
                         <Checkbox
                           name="isComplete"
                           checked={thisTask.complete}
-                          onChange={toggleComplete(index)}
+                          onChange={this.toggleComplete(index)}
                         />
                       </TableCell>
                       <TableCell align="center">
