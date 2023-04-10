@@ -361,25 +361,25 @@ export default function App() {
                 <TableCell align="center" sx={{ color: 'grey' }}>Action</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>{arrayTask.map((task, index) => {
+            <TableBody>{arrayTask.map((thisTask, index) => {
       return (
-        <TableRow key={task.id}>
-          <TableCell align="center">{task.title}</TableCell>
-          <TableCell align="center">{task.description}</TableCell>
+        <TableRow key={thisTask.id}>
+          <TableCell align="center">{thisTask.title}</TableCell>
+          <TableCell align="center">{thisTask.description}</TableCell>
           <TableCell align="center">
-            {moment(task.deadline).format('MM/DD/YY')}
+            {moment(thisTask.deadline).format('MM/DD/YY')}
           </TableCell>
-          <TableCell align="center">{task.priority}</TableCell>
+          <TableCell align="center">{thisTask.priority}</TableCell>
           <TableCell align="center">
             <Checkbox
               name="isComplete"
-              checked={task.isComplete}
+              checked={thisTask.complete}
               onChange={toggleComplete(index)}
             />
           </TableCell>
           <TableCell align="center">
             <div>
-              {!task.complete && (
+              {!thisTask.complete && (
                 <div>
                 <Button
                   variant="contained"
