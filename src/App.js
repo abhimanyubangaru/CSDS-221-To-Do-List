@@ -140,15 +140,19 @@ export default function App() {
   };
 
   const changeTitle = (w) => {
-    setTask({ ...props.task, title: w})
+    setTask({ ...task, title: w})
   }
 
   const changeDescription = (w) => {
-    setTask({ ...props.task, description: e.target.value })
+    setTask({ ...task, description: e.target.value })
   }
 
   const changeDeadline = (w) => {
-    setTask({ ...props.task, deadline: e.target.value })
+    setTask({ ...task, deadline: e.target.value })
+  }
+
+  const changePriority = (w) => {
+    setTask({ ...task, priority: e.target.value })
   }
   
 
@@ -247,7 +251,7 @@ export default function App() {
         }
       ></CardHeader>
       <CardContent>
-      <Dialog addSate={addState} task={task} title={task.title} description={task.description} deadline={task.deadline} priority={task.priority} ></Dialog>
+      <Dialog openState={openState} addState={addState} task={task} changeTitle={changeTitle} changeDescription={changeDescription} changeDeadline={changeDeadline} changePriority={changePriority}></Dialog>
         <TableContainer>
           <Table>
             <TableHead>

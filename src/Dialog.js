@@ -37,7 +37,7 @@ export default function Dialog(props) {
   return (
     <div>
         {/*Dialog*/}
-        <Dialog open={openState} onClose={handleClose}>
+        <Dialog open={true} onClose={handleClose}>
           {props.addState ? (
             <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'white' }}>
               <AddCircleIcon id="header" />
@@ -58,7 +58,7 @@ export default function Dialog(props) {
                 error={titleError}
                 helperText={titleValidator}
                 value={props.task.title}
-                onChange={(e) => setTask({ ...props.task, title: e.target.value })}
+                onChange={(e) => props.changeTitle(e)}
               />
               }
               <br /> <br />
@@ -73,7 +73,7 @@ export default function Dialog(props) {
                 fullWidth
                 value={props.task.description}
                 onChange={(e) =>
-                  setTask({ ...props.task, description: e.target.value })
+                  props.changeDescription(e)
                 }
               />
               <br /> <br />
@@ -83,9 +83,7 @@ export default function Dialog(props) {
                   margin="dense"
                   label="Deadline"
                   value={props.deadline}
-                  onChange={(newValue) => {
-                    setTask({ ...props.task, deadline: newValue });
-                  }}
+                  onChange={(newValue) => props.changeDeadline(e)}
                   renderInput={(params) => <TextField {...params} />}
                 />
                 </LocalizationProvider>
@@ -98,7 +96,7 @@ export default function Dialog(props) {
                   aria-label="priority"
                   value={props.priority}
                   onChange={(e) =>
-                    setTask({ ...props.task, priority: e.target.value })
+                    props.changePriority(e)
                   }
                 >
                   <FormControlLabel
