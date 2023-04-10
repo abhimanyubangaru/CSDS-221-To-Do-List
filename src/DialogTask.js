@@ -99,6 +99,7 @@ export default function DialogTask(props) {
           priority: priority,
           checked: checked,
         },
+        index: props.index
       });
     }
   };
