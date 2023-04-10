@@ -77,8 +77,12 @@ export default class Page extends Component {
     if (data.action === 'submit') {
       console.log("reached here");
       this.addSuccess();
-      this.setState({ rows: [...this.state.rows, data.data] });
+      this.setState({ rows: [...this.state.rows, data.task] });
       this.handleClose();
+      console.log(
+        "printing tasks"
+      );
+      console.log(this.state.rows)
     } else if (data.action === 'cancel') {
       this.handleClose();
     } else if (data.action === 'edit') {
@@ -88,10 +92,10 @@ export default class Page extends Component {
     }
   };
 
-  toggleComplete = (index) => {
+  toggleIsComplete = (index) => {
     let newTasks = [...this.state.rows];
-    newTask[index]['checked'] = !newTask[index]['checked'];
-    this.setState({ rows: newTask });
+    newTasks[index]['checked'] = !newTasks[index]['checked'];
+    this.setState({ rows: newTasks });
   };
 
   render() {
@@ -168,13 +172,13 @@ export default class Page extends Component {
                         {thisTask.description}
                       </TableCell>
                       <TableCell align="center">
-                        {new Date(thisTask.deadline.toLocaleDateString("en-US"))}
+                        {moment(thisTask.deadline).format("MM/DD/YY")}
                       </TableCell>
                       <TableCell align="center">{thisTask.priority}</TableCell>
                       <TableCell align="center">{thisTask.checked ? <Checkbox checked={row.checked} onChange={(e) => {this.toggleIsComplete(index)}}/> :
                         <Checkbox
                           
-                          checked={row.checked}
+                          checked={thisTask.checked}
                           onChange={(e) => {this.toggleIsComplete(index)}}
                         /> }
                       </TableCell>
