@@ -26,7 +26,7 @@ import FormLabel from '@mui/material/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import CancelIcon from '@mui/icons-material/Cancel';
-import RadioGroup from '@mui/material/RadioGroup'
+import RadioGroup from '@mui/material/RadioGroup';
 import { ToastContainer, toast } from 'react-toastify';
 import { LocalizationProvider, DateAdapter } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -34,18 +34,32 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Dialog(props) {
-
   //props
-  const [add, setAdd] = useState(props.add)
-  let [tasks, setTasks] = useState(props.tasks)
-  const [title, setTitle] = useState( isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index][title]);
-  const [description, setDescription] = useState(isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index][description]);
-  const [deadline, setDeadline] = useState( isThisEmpty(tasks) || props.index === -1 ? null : tasks[props.index][deadline]);
-  const [priority, setPriority] = useState( isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index][priority]);
-  const [checked, setChecked] = useState( isThisEmpty(tasks) || props.index === -1 ? null : tasks[props.index][checked]);
+  const [add] = useState(props.add);
+  let [tasks] = useState(props.tasks);
+  const [title, setTitle] = useState(
+    isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index][title]
+  );
+  const [description, setDescription] = useState(
+    isThisEmpty(tasks) || props.index === -1
+      ? ''
+      : tasks[props.index][description]
+  );
+  const [deadline, setDeadline] = useState(
+    isThisEmpty(tasks) || props.index === -1
+      ? null
+      : tasks[props.index][deadline]
+  );
+  const [priority, setPriority] = useState(
+    isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index][priority]
+  );
+  const [checked, setChecked] = useState(
+    isThisEmpty(tasks) || props.index === -1
+      ? null
+      : tasks[props.index][checked]
+  );
 
-  const callback = props.parentCallBack
-
+  const callback = props.parentCallBack;
 
   //Validation for title and description
   //string error messages
@@ -55,32 +69,58 @@ export default function Dialog(props) {
   const [titleError, setTitleError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
 
-
-  function isThisEmpty(item){
+  function isThisEmpty(item) {
     return !item || item.length === 0 || Object.keys(item).length === 0;
   }
 
-  //when hit the cancel button 
+  //when hit the cancel button
   let closeDialog = () => {
     callback({
       action: 'cancel',
-      task: {}
-    })
-  }
+      task: {},
+    });
+  };
 
-  //when hit submit button 
+  //when hit submit button
   let submitAddTask = () => {
-    if(!validateDescription() && !validateTitle() && validatePriority && deadline){
+    if (
+      !validateDescription() & !validateTitle() &&
+      validatePriority &&
+      deadline
+    ) {
       callback({
         action: 'submit',
-        task: { title: title, description: description, deadline: deadline, priority: priority}
-      })
+        task: {
+          title: title,
+          description: description,
+          deadline: deadline,
+          priority: priority,
+          checked: checked,
+          setChecked: setChecked,
+        },
+      });
     }
-  }
+  };
+
+  let updateTask = () => {
+    if (!validateDescription() && validatePriority() && deadline) {
+      callback({
+        action: 'edit',
+        task: {
+          title: title,
+          description: description,
+          deadline: deadline,
+          priority: priority,
+          checked: checked,
+          setChecked: setChecked,
+        },
+      });
+    }
+  };
 
   let validatePriority = () => {
-    return priority !== ''
-  }
+    return priority !== '';
+  };
 
   let validateDescription = () => {
     let err = false;
@@ -112,120 +152,115 @@ export default function Dialog(props) {
       err = true;
       setTitleError(true);
     }
+  };
+
   return (
     <div>
-        {/*Dialog*/}
-        <Dialog open={true} onClose={handleClose}>
-          {props.addState ? (
-            <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'white' }}>
-              <AddCircleIcon id="header" />
-              &nbsp; Add Task
-            </DialogTitle>
-          ) : (
-            <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'white' }}>
-              <EditIcon id="header" /> Edit Task
-            </DialogTitle>
-          )}
-          <form>
-            <DialogContent>
-              {/* input fields for title, description, deadline, and priority */}
-              {props.addState && <TextField
+      {/*Dialog*/}
+      <Dialog open={true} onClose={handleClose}>
+        {add ? (
+          <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'white' }}>
+            <AddCircleIcon id="header" />
+            &nbsp; Add Task
+          </DialogTitle>
+        ) : (
+          <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'white' }}>
+            <EditIcon id="header" /> Edit Task
+          </DialogTitle>
+        )}
+        <form>
+          <DialogContent>
+            {/* input fields for title, description, deadline, and priority */}
+            {add && (
+              <TextField
                 label="Title"
                 placeholder="Title"
                 fullWidth
                 error={titleError}
                 helperText={titleValidator}
                 value={props.task.title}
-                onChange={(e) => props.changeTitle(e)}
+                onChange={(e) => setTitle(e.target.value)}
               />
-              }
-              <br /> <br />
-              {/*Textfield for Description box*/}
-              <TextField
-                aria-label="minimum height"
-                minRows={3}
-                label="Description"
-                placeholder="Description"
-                error={descriptionError}
-                helperText={descriptionValidator}
-                fullWidth
-                value={props.task.description}
-                onChange={(e) =>
-                  props.changeDescription(e)
-                }
+            )}
+            <br /> <br />
+            {/*Textfield for Description box*/}
+            <TextField
+              aria-label="minimum height"
+              minRows={3}
+              label="Description"
+              placeholder="Description"
+              error={descriptionError}
+              helperText={descriptionValidator}
+              fullWidth
+              value={props.task.description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <br /> <br />
+            {/*Date Picker*/}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                margin="dense"
+                label="Deadline"
+                value={props.deadline}
+                onChange={(newValue) => setEntry(newValue)}
+                renderInput={(params) => <TextField {...params} />}
               />
-              <br /> <br />
-              {/*Date Picker*/}
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  margin="dense"
-                  label="Deadline"
-                  value={props.deadline}
-                  onChange={(newValue) => props.changeDeadline(e)}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-                </LocalizationProvider>
-              {/*Radio for Priority*/}
-              <br /> <br />
-              <FormControl component="fieldset">
-                <FormLabel component="legend">Priority</FormLabel>
-                <RadioGroup
-                  row
-                  aria-label="priority"
-                  value={props.priority}
-                  onChange={(e) =>
-                    props.changePriority(e)
-                  }
-                >
-                  <FormControlLabel
-                    value="low"
-                    control={<Radio/>}
-                    label="Low"
-                  />
-                  <FormControlLabel
-                    value="medium"
-                    control={<Radio />}
-                    label="Medium"
-                  />
-                  <FormControlLabel
-                    value="high"
-                    control={<Radio />}
-                    label="High"
-                  />
-                </RadioGroup>
-              </FormControl>
-            </DialogContent>
-            <DialogActions>
-              {props.addState ? (
-                <Button
-                  onClick={props.handleAddingEntry}
-                  variant="contained"
-                  sx={{ bgcolor: 'primary.dark', width: '35%' }}
-                >
-                  <AddCircleIcon fontSize="small" />
-                  &nbsp;Add
-                </Button>
-              ) : (
-                <Button
-                  onClick={props.handleEditing}
-                  variant="contained"
-                  sx={{ bgcolor: 'primary.dark', width: '35%' }}
-                >
-                  <EditIcon fontSize="small" />
-                  &nbsp;Edit
-                </Button>
-              )}
-              <Button
-                onClick={props.closeDialog}
-                variant="contained"
-                sx={{ bgcolor: 'red', width: '35%' }}
+            </LocalizationProvider>
+            {/*Radio for Priority*/}
+            <br /> <br />
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Priority</FormLabel>
+              <RadioGroup
+                row
+                aria-label="priority"
+                value={priority}
+                onChange={(e) => setPriority(e.target.value)}
               >
-                <DoNotDisturbAltIcon fontSize="small" />
-                Cancel
+                <FormControlLabel value="low" control={<Radio />} label="Low" />
+                <FormControlLabel
+                  value="medium"
+                  control={<Radio />}
+                  label="Medium"
+                />
+                <FormControlLabel
+                  value="high"
+                  control={<Radio />}
+                  label="High"
+                />
+              </RadioGroup>
+            </FormControl>
+          </DialogContent>
+          <DialogActions>
+            {add ? (
+              <Button
+                onClick={submitAddTask}
+                variant="contained"
+                sx={{ bgcolor: 'primary.dark', width: '35%' }}
+              >
+                <AddCircleIcon fontSize="small" />
+                &nbsp;Add
               </Button>
-            </DialogActions>
-          </form>
-        </Dialog>
+            ) : (
+              <Button
+                onClick={updateTask}
+                variant="contained"
+                sx={{ bgcolor: 'primary.dark', width: '35%' }}
+              >
+                <EditIcon fontSize="small" />
+                &nbsp;Edit
+              </Button>
+            )}
+            <Button
+              onClick={closeDialog}
+              variant="contained"
+              sx={{ bgcolor: 'red', width: '35%' }}
+            >
+              <DoNotDisturbAltIcon fontSize="small" />
+              Cancel
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
     </div>
   );
 }
