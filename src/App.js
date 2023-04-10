@@ -363,7 +363,7 @@ export default function App() {
             </TableHead>
             <TableBody>{arrayTask.map((thisTask, index) => {
       return (
-        <TableRow key={thisTask.id}>
+        <TableRow key={thisTask.title}>
           <TableCell align="center">{thisTask.title}</TableCell>
           <TableCell align="center">{thisTask.description}</TableCell>
           <TableCell align="center">
