@@ -170,46 +170,15 @@ export default class Page extends Component {
                       <TableCell align="center">{thisTask.priority}</TableCell>
                       <TableCell align="center">{thisTask.checked ? <Checkbox checked={row.checked} onChange={(e) => {this.toggleIsComplete(index)}}/> :
                         <Checkbox
-                          name="isComplete"
-                          checked={thisTask.complete}
-                          onChange={this.toggleComplete(index)}
+                          
+                          checked={row.checked}
+                          onChange={(e) => {this.toggleIsComplete(index)}}
                         /> }
                       </TableCell>
                       <TableCell align="center">
-                        <div>
-                          {!thisTask.complete && (
-                            <div>
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                sx={{ bgcolor: 'primary' }}
-                                onClick={() => openUpdateDialog(index)}
-                              >
-                                <EditIcon fontSize="small" />
-                                &nbsp;Update
-                              </Button>
-                            </div>
-                          )}
-                          <div>
-                            <Button
-                              color="error"
-                              variant="contained"
-                              sx={{ bgcolor: 'red' }}
-                              onClick={() => {
-                                this.setState((prevState) => ({
-                                  rows: [
-                                    ...prevState.rows.slice(0, index),
-                                    ...prevState.rows.slice(index + 1)
-                                  ]
-                                }));
-                                deleteSuccess();
-                              }}
-                            >
-                              <CancelIcon fontSize="small" />
-                              &nbsp;Delete
-                            </Button>
-                          </div>
-                        </div>
+                       {!thisTask.checked && <Button variant="contained" sx={{width : 100}} onClick={() => this.editTask(index)}>
+                         
+                         }
                       </TableCell>
                     </TableRow>
                   );
@@ -218,6 +187,7 @@ export default class Page extends Component {
             </Table>
           </TableContainer>
         </CardContent>
+        </Card>
         {/*TOASTER CONTAINER SO TOASTS CAN DISPLAY */}
         <ToastContainer
           position="bottom-right"
