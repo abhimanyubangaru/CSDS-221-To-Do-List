@@ -31,7 +31,7 @@ export default class Page extends Component {
       task: {
         deadline: moment(),
       },
-      tasks: [],
+      rows: [],
       open: false,
       add: false,
       index: -1,
@@ -65,16 +65,16 @@ export default class Page extends Component {
 
   //used to edit a row
   editThisRow = (data) => {
-    let newTasks = [...this.state.tasks];
+    let newTasks = [...this.state.rows];
     newTasks[data.index] = data.data;
-    this.setState({ tasks: newTasks });
+    this.setState({ rows: newTasks });
   };
 
   //Callback from dialog input to see what next to do
   dialogCallback = (data) => {
     if (data.action === 'submit') {
       this.addSuccess();
-      this.setState({ tasks: [...this.state.tasks, data.data] });
+      this.setState({ rows: [...this.state.rows, data.data] });
       this.handleClose();
     } else if (data.action === 'cancel') {
       this.handleClose();
@@ -86,14 +86,14 @@ export default class Page extends Component {
   };
 
   toggleComplete = (index) => {
-    let newTasks = [...this.state.tasks];
+    let newTasks = [...this.state.rows];
     newTasks[index].complete = !newTasks[index].complete;
-    this.setState({ tasks: newTasks });
+    this.setState({ rows: newTasks });
   };
 
   render() {
     return (
-      <div>
+      <>
          <DiaWrap open={this.state.open} onClose={() => this.dialogCallback()}>
             <DialogTask
               add={this.state.add}
@@ -101,7 +101,7 @@ export default class Page extends Component {
               data={this.state.data}
               dataFromParents={this.state.task}
               parentCallback={this.dialogCallback}
-              tasks={this.state.tasks}
+              tasks={this.state.rows}
             ></DialogTask>
           </DiaWrap>
         {/*HEADER*/}
@@ -155,7 +155,7 @@ export default class Page extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {this.state.tasks.map((thisTask, index) => {
+                {this.state.rows.map((thisTask, index) => {
                   return (
                     <TableRow key={thisTask.title}>
                       <TableCell align="center">{thisTask.title}</TableCell>
@@ -195,10 +195,10 @@ export default class Page extends Component {
                               sx={{ bgcolor: 'red' }}
                               onClick={() => {
                                 this.setState((prevState) => ({
-                                  tasks: [
-                                    ...prevState.tasks.slice(0, index),
-                                    ...prevState.tasks.slice(index + 1),
-                                  ],
+                                  rows: [
+                                    ...prevState.rows.slice(0, index),
+                                    ...prevState.rows.slice(index + 1)
+                                  ]
                                 }));
                                 deleteSuccess();
                               }}
@@ -228,7 +228,7 @@ export default class Page extends Component {
           draggable
           pauseOnHover
         />
-      </div>
+      </>
     );
   }
 }
