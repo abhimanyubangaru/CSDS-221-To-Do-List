@@ -66,7 +66,7 @@ export default class Page extends Component {
   //used to edit a row
   editThisRow = (data) => {
     let newTasks = [...this.state.tasks];
-    newTasks[data.index] = data.task;
+    newTasks[data.index] = data.data;
     this.setState({ tasks: newTasks });
   };
 
@@ -74,7 +74,7 @@ export default class Page extends Component {
   dialogCallback = (data) => {
     if (data.action === 'submit') {
       this.addSuccess();
-      this.setState({ tasks: [...this.state.tasks, data.task] });
+      this.setState({ tasks: [...this.state.tasks, data.data] });
       this.handleClose();
     } else if (data.action === 'cancel') {
       this.handleClose();
@@ -124,7 +124,8 @@ export default class Page extends Component {
             <Dialog
               add={this.state.add}
               index={this.state.index}
-              task={this.state.task}
+              data={this.state.data}
+              dataFromParents={this.state.task}
               parentCallback={this.dialogCallback}
               tasks={this.state.tasks}
             ></Dialog>

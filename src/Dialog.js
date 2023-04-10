@@ -1,33 +1,20 @@
 import React from 'react';
 import './style.css';
 import React, { Component, useState } from 'react';
-import CardHeader from '@mui/material/CardHeader';
-import TableBody from '@mui/material/TableBody';
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import moment from 'moment';
 import TextField from '@mui/material/TextField';
 import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
-import TableContainer from '@mui/material/TableContainer';
-import Table from '@mui/material/Table';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import MenuIcon from '@mui/icons-material/Menu';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import CardContent from '@mui/material/CardContent';
 import EditIcon from '@mui/icons-material/Edit';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
-import CancelIcon from '@mui/icons-material/Cancel';
 import RadioGroup from '@mui/material/RadioGroup';
-import { ToastContainer, toast } from 'react-toastify';
 import { LocalizationProvider, DateAdapter } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -38,28 +25,24 @@ export default function Dialog(props) {
   const [add] = useState(props.add);
   let [tasks] = useState(props.tasks);
   const [title, setTitle] = useState(
-    isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index][title]
+    isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index].title
   );
   const [description, setDescription] = useState(
     isThisEmpty(tasks) || props.index === -1
       ? ''
-      : tasks[props.index][description]
+      : tasks[props.index].description
   );
   const [deadline, setDeadline] = useState(
     isThisEmpty(tasks) || props.index === -1
       ? null
-      : tasks[props.index][deadline]
+      : tasks[props.index].deadline
   );
   const [priority, setPriority] = useState(
-    isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index][priority]
+    isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index].priority
   );
   const [checked, setChecked] = useState(
-    isThisEmpty(tasks) || props.index === -1
-      ? null
-      : tasks[props.index][checked]
+    isThisEmpty(tasks) || props.index === -1 ? null : tasks[props.index].checked
   );
-
-  const callback = props.parentCallBack;
 
   //Validation for title and description
   //string error messages
@@ -75,7 +58,7 @@ export default function Dialog(props) {
 
   //when hit the cancel button
   let closeDialog = () => {
-    callback({
+    props.parentCallBack({
       action: 'cancel',
       task: {},
     });
@@ -88,7 +71,7 @@ export default function Dialog(props) {
       validatePriority &&
       deadline
     ) {
-      callback({
+      props.parentCallBack({
         action: 'submit',
         task: {
           title: title,
@@ -104,7 +87,7 @@ export default function Dialog(props) {
 
   let updateTask = () => {
     if (!validateDescription() && validatePriority() && deadline) {
-      callback({
+      props.parentCallBack({
         action: 'edit',
         task: {
           title: title,
