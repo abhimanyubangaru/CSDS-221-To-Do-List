@@ -30,7 +30,7 @@ export default class Page extends Component {
     super(props);
     this.state = {
       task: {
-        deadline: moment(),
+        deadline: moment()
       },
       rows: [],
       open: false,
