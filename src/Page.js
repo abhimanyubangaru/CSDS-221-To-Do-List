@@ -29,9 +29,7 @@ export default class Page extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      task: {
-        deadline: moment()
-      },
+      task:  {},
       tasks: [],
       open: false,
       add: false,
