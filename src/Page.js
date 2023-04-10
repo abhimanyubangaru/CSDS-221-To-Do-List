@@ -117,6 +117,7 @@ export default class Page extends Component {
           }
         ></CardHeader>
         <CardContent>
+          <DiaWrap open={this.state.open} onClose = {() -> this.dialogCallBack()}>
           <Dialog
             add={this.state.add}
             index={this.state.index}
@@ -124,6 +125,7 @@ export default class Page extends Component {
             parentCallback={this.dialogCallback}
             tasks={this.state.tasks}
           ></Dialog>
+          </DiaWrap>
           <TableContainer>
             <Table>
               <TableHead>
