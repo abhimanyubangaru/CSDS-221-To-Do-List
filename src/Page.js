@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -35,12 +36,12 @@ export default class Page extends Component {
       open: false,
       add: false,
       index: -1,
-      data: {},
+      data: {}
     };
   }
 
   //add a task
-  addATask() {
+  addTask() {
     //open the dialog
     this.setState({ open: true });
     //then you need to make it an add dialog, not edit dialog
@@ -50,7 +51,7 @@ export default class Page extends Component {
   }
 
   //Edit an existing task
-  editATask(index) {
+  editTask(index) {
     //open the dialog
     this.setState({ open: true });
     //then you need to make it an edit dialog, not add dialog
@@ -64,7 +65,7 @@ export default class Page extends Component {
   }
 
   //used to edit a row
-  editThisRow = (data) => {
+  editRow = (data) => {
     let newTasks = [...this.state.rows];
     newTasks[data.index] = data.data;
     this.setState({ rows: newTasks });
@@ -80,15 +81,15 @@ export default class Page extends Component {
       this.handleClose();
     } else if (data.action === 'edit') {
       this.updateSuccess();
-      this.editATask(data);
+      this.editRow(data);
       this.handleClose();
     }
   };
 
   toggleComplete = (index) => {
     let newTasks = [...this.state.rows];
-    newTasks[index].complete = !newTasks[index].complete;
-    this.setState({ rows: newTasks });
+    newTask[index]['checked'] = !newTask[index]['checked'];
+    this.setState({ rows: newTask });
   };
 
   render() {
@@ -105,6 +106,7 @@ export default class Page extends Component {
             ></DialogTask>
           </DiaWrap>
         {/*HEADER*/}
+        <Card sx = {{margin '20px'}} >
         <CardHeader
           sx={{ bgcolor: 'primary.dark', color: 'white' }}
           title={
@@ -120,7 +122,7 @@ export default class Page extends Component {
             <>
               <Button
                 variant="contained"
-                onClick={this.addATask}
+                onClick={() => this.addTask()}
                 sx={{ marginRight: '5%' }}
               >
                 <AddCircleIcon />
@@ -128,10 +130,10 @@ export default class Page extends Component {
               </Button>
             </>
           }
-        ></CardHeader>
-        <CardContent>
+        />
+        <CardContent sx = {{bgcolor: 'white', marginBottom: -1 }}>
           <TableContainer>
-            <Table>
+            <Table sx ={{bgcolor: 'white'}}>
               <TableHead>
                 <TableRow>
                   <TableCell align="center" sx={{ color: 'grey' }}>
@@ -163,15 +165,15 @@ export default class Page extends Component {
                         {thisTask.description}
                       </TableCell>
                       <TableCell align="center">
-                        {moment(thisTask.deadline).format('MM/DD/YY')}
+                        {new Date(thisTask.deadline.toLocaleDateString("en-US"))}
                       </TableCell>
                       <TableCell align="center">{thisTask.priority}</TableCell>
-                      <TableCell align="center">
+                      <TableCell align="center">{thisTask.checked ? <Checkbox checked={row.checked} onChange={(e) => {this.toggleIsComplete(index)}}/> :
                         <Checkbox
                           name="isComplete"
                           checked={thisTask.complete}
                           onChange={this.toggleComplete(index)}
-                        />
+                        /> }
                       </TableCell>
                       <TableCell align="center">
                         <div>
