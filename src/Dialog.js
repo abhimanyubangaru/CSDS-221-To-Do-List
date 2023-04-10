@@ -34,6 +34,84 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Dialog(props) {
+
+  //props
+  const [add, setAdd] = useState(props.add)
+  let [tasks, setTasks] = useState(props.tasks)
+  const [title, setTitle] = useState( isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index][title]);
+  const [description, setDescription] = useState(isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index][description]);
+  const [deadline, setDeadline] = useState( isThisEmpty(tasks) || props.index === -1 ? null : tasks[props.index][deadline]);
+  const [priority, setPriority] = useState( isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index][priority]);
+  const [checked, setChecked] = useState( isThisEmpty(tasks) || props.index === -1 ? null : tasks[props.index][checked]);
+
+  const callback = props.parentCallBack
+
+
+  //Validation for title and description
+  //string error messages
+  const [titleValidator, setTitleValidator] = useState('');
+  const [descriptionValidator, setDescriptionValidator] = useState('');
+  //error flags
+  const [titleError, setTitleError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+
+
+  function isThisEmpty(item){
+    return !item || item.length === 0 || Object.keys(item).length === 0;
+  }
+
+  //when hit the cancel button 
+  let closeDialog = () => {
+    callback({
+      action: 'cancel',
+      task: {}
+    })
+  }
+
+  //when hit submit button 
+  let submitAddTask = () => {
+    if(!validateDescription() && !validateTitle() && validatePriority && deadline){
+      callback({
+        action: 'submit',
+        task: { title: title, description: description, deadline: deadline, priority: priority}
+      })
+    }
+  }
+
+  let validatePriority = () => {
+    return priority !== ''
+  }
+
+  let validateDescription = () => {
+    let err = false;
+    if (description == '') {
+      setDescriptionValidator('Description is required!');
+      err = true;
+      setDescriptionError(true);
+    } else {
+      setDescriptionValidator('');
+      setDescriptionError(false);
+    }
+    return err;
+  };
+
+  let validateTitle = () => {
+    let err = false;
+    if (title == '') {
+      setTitleValidator('Title is required!');
+      err = true;
+      setTitleError(true);
+    } else {
+      setTitleValidator('');
+      setTitleError(false);
+    }
+    // Check if the task title already exists in the array
+    let existingTask = tasks.find((item) => item.title === title);
+    if (existingTask && arrayTask.indexOf(existingTask) !== props.index) {
+      setTitleValidator('Title already exists!');
+      err = true;
+      setTitleError(true);
+    }
   return (
     <div>
         {/*Dialog*/}
