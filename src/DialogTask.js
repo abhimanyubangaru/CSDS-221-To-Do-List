@@ -140,7 +140,6 @@ export default function DialogTask(props) {
   return (
     <div>
       {/*Dialog*/}
-      <Dialog open={true} onClose={handleClose}>
         {add ? (
           <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'white' }}>
             <AddCircleIcon id="header" />
@@ -161,7 +160,7 @@ export default function DialogTask(props) {
                 fullWidth
                 error={titleError}
                 helperText={titleValidator}
-                value={props.task.title}
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             )}
@@ -175,7 +174,7 @@ export default function DialogTask(props) {
               error={descriptionError}
               helperText={descriptionValidator}
               fullWidth
-              value={props.task.description}
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
             <br /> <br />
@@ -243,7 +242,7 @@ export default function DialogTask(props) {
             </Button>
           </DialogActions>
         </form>
-      </Dialog>
+
     </div>
   );
 }
