@@ -73,7 +73,9 @@ export default class Page extends Component {
 
   //Callback from dialog input to see what next to do
   dialogCallback = (data) => {
+    
     if (data.action === 'submit') {
+      console.log("reached here");
       this.addSuccess();
       this.setState({ rows: [...this.state.rows, data.data] });
       this.handleClose();
@@ -158,6 +160,7 @@ export default class Page extends Component {
               </TableHead>
               <TableBody>
                 {this.state.rows.map((thisTask, index) => {
+                  console.log(thisTask); 
                   return (
                     <TableRow key={thisTask.title}>
                       <TableCell align="center">{thisTask.title}</TableCell>

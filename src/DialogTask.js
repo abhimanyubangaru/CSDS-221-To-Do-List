@@ -7,6 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
+import moment from 'moment';
 import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import EditIcon from '@mui/icons-material/Edit';
@@ -34,7 +35,7 @@ export default function DialogTask(props) {
   );
   const [deadline, setDeadline] = useState(
     isThisEmpty(tasks) || props.index === -1
-      ? null
+      ? moment()
       : tasks[props.index].deadline
   );
   const [priority, setPriority] = useState(
@@ -71,6 +72,7 @@ export default function DialogTask(props) {
       validatePriority &&
       deadline
     ) {
+      console.log(title)
       props.parentCallback({
         action: 'submit',
         task: {
@@ -82,6 +84,7 @@ export default function DialogTask(props) {
           setChecked: setChecked,
         },
       });
+      
     }
   };
 
