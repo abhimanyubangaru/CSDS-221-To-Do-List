@@ -138,6 +138,18 @@ export default function App() {
   
     return err;
   };
+
+  const changeTitle = (w) => {
+    setTask({ ...props.task, title: w})
+  }
+
+  const changeDescription = (w) => {
+    setTask({ ...props.task, description: e.target.value })
+  }
+
+  const changeDeadline = (w) => {
+    setTask({ ...props.task, deadline: e.target.value })
+  }
   
 
   const handleOpen = () => {
@@ -235,120 +247,7 @@ export default function App() {
         }
       ></CardHeader>
       <CardContent>
-        {/*Dialog*/}
-        <Dialog open={openState} onClose={handleClose}>
-          {addState ? (
-            <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'white' }}>
-              <AddCircleIcon id="header" />
-              &nbsp; Add Task
-            </DialogTitle>
-          ) : (
-            <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'white' }}>
-              <EditIcon id="header" /> Edit Task
-            </DialogTitle>
-          )}
-          <form>
-            <DialogContent>
-              {/* input fields for title, description, deadline, and priority */}
-              {addState && <TextField
-                label="Title"
-                placeholder="Title"
-                fullWidth
-                error={titleError}
-                helperText={titleValidator}
-                value={task.title}
-                onChange={(e) => setTask({ ...task, title: e.target.value })}
-              />
-              }
-              <br /> <br />
-              {/*Textfield for Description box*/}
-              <TextField
-                aria-label="minimum height"
-                minRows={3}
-                label="Description"
-                placeholder="Description"
-                error={descriptionError}
-                helperText={descriptionValidator}
-                fullWidth
-                value={task.description}
-                onChange={(e) =>
-                  setTask({ ...task, description: e.target.value })
-                }
-              />
-              <br /> <br />
-              {/*Date Picker*/}
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  margin="dense"
-                  label="Deadline"
-                  value={task.deadline}
-                  onChange={(newValue) => {
-                    setTask({ ...task, deadline: newValue });
-                  }}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-                </LocalizationProvider>
-              {/*Radio for Priority*/}
-              <br /> <br />
-              <FormControl component="fieldset">
-                <FormLabel component="legend">Priority</FormLabel>
-                <RadioGroup
-                  row
-                  aria-label="priority"
-                  value={task.priority}
-                  onChange={(e) =>
-                    setTask({ ...task, priority: e.target.value })
-                  }
-                >
-                  <FormControlLabel
-                    value="low"
-                    control={<Radio/>}
-                    label="Low"
-                  />
-                  <FormControlLabel
-                    value="medium"
-                    control={<Radio />}
-                    label="Medium"
-                  />
-                  <FormControlLabel
-                    value="high"
-                    control={<Radio />}
-                    label="High"
-                  />
-                </RadioGroup>
-              </FormControl>
-            </DialogContent>
-            <DialogActions>
-              {addState ? (
-                <Button
-                  onClick={() => handleAddingEntry()}
-                  variant="contained"
-                  sx={{ bgcolor: 'primary.dark', width: '35%' }}
-                >
-                  <AddCircleIcon fontSize="small" />
-                  &nbsp;Add
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => handleEditing()}
-                  variant="contained"
-                  sx={{ bgcolor: 'primary.dark', width: '35%' }}
-                >
-                  <EditIcon fontSize="small" />
-                  &nbsp;Edit
-                </Button>
-              )}
-              <Button
-                onClick={closeDialog}
-                variant="contained"
-                sx={{ bgcolor: 'red', width: '35%' }}
-              >
-                <DoNotDisturbAltIcon fontSize="small" />
-                Cancel
-              </Button>
-            </DialogActions>
-          </form>
-        </Dialog>
+      <Dialog addSate={addState} task={task} title={task.title} description={task.description} deadline={task.deadline} priority={task.priority} ></Dialog>
         <TableContainer>
           <Table>
             <TableHead>
