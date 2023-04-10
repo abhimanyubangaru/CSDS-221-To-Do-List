@@ -89,6 +89,7 @@ export default function DialogTask(props) {
 
   let updateTask = () => {
     if (!validateDescription() && validatePriority() && deadline) {
+      console.log("YUUUH");
       props.parentCallback({
         action: 'edit',
         task: {
@@ -242,7 +243,7 @@ export default function DialogTask(props) {
               sx={{ bgcolor: 'red', width: '35%' }}
             >
               <DoNotDisturbAltIcon fontSize="small" />
-              Cancel
+              &nbsp;Cancel
             </Button>
           </DialogActions>
         </form>
