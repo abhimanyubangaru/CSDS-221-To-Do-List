@@ -94,6 +94,16 @@ export default class Page extends Component {
   render() {
     return (
       <div>
+         <DiaWrap open={this.state.open} onClose={() => this.dialogCallback()}>
+            <DialogTask
+              add={this.state.add}
+              index={this.state.index}
+              data={this.state.data}
+              dataFromParents={this.state.task}
+              parentCallback={this.dialogCallback}
+              tasks={this.state.tasks}
+            ></DialogTask>
+          </DiaWrap>
         {/*HEADER*/}
         <CardHeader
           sx={{ bgcolor: 'primary.dark', color: 'white' }}
@@ -120,16 +130,6 @@ export default class Page extends Component {
           }
         ></CardHeader>
         <CardContent>
-          <DiaWrap open={this.state.open} onClose={() => this.dialogCallBack()}>
-            <DialogTask
-              add={this.state.add}
-              index={this.state.index}
-              data={this.state.data}
-              dataFromParents={this.state.task}
-              parentCallback={this.dialogCallback}
-              tasks={this.state.tasks}
-            ></DialogTask>
-          </DiaWrap>
           <TableContainer>
             <Table>
               <TableHead>
