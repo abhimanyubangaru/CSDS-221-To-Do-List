@@ -170,7 +170,7 @@ export default class Page extends Component {
                           {thisTask.description}
                         </TableCell>
                         <TableCell align="center">
-                          {moment(thisTask.deadline).format('MM/DD/YY')}
+                          {moment(this.state.tasks[index].deadline).format('MM/DD/YY')}
                         </TableCell>
                         <TableCell align="center">
                           {thisTask.priority}
