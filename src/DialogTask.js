@@ -69,7 +69,7 @@ export default function DialogTask(props) {
   let submitAddTask = () => {
     if (
       !validateDescription() & !validateTitle() &&
-      validatePriority &&
+      validatePriority() &&
       deadline
     ) {
       console.log(title)
