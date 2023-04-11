@@ -98,7 +98,6 @@ export default class Page extends Component {
         <DiaWrap
           open={this.state.open}
           onClose={() => this.dialogCallback()}
-          disableBackdropClick={true}
         >
           <DialogTask
             add={this.state.add}
