@@ -22,7 +22,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function DialogTask(props) {
-  //props -> essentially if it is at -1 that means it is add not empty 
+  //props -> essentially if it is at -1 that means it is add not empty
   const [add] = useState(props.add);
   let [tasks] = useState(props.tasks);
   const [title, setTitle] = useState(
@@ -72,7 +72,7 @@ export default function DialogTask(props) {
       validatePriority() &&
       deadline
     ) {
-      console.log(title)
+      console.log(title);
       props.parentCallback({
         action: 'submit',
         task: {
@@ -83,7 +83,6 @@ export default function DialogTask(props) {
           checked: checked,
         },
       });
-      
     }
   };
 
@@ -98,7 +97,7 @@ export default function DialogTask(props) {
           priority: priority,
           checked: checked,
         },
-        index: props.index
+        index: props.index,
       });
     }
   };
@@ -132,122 +131,116 @@ export default function DialogTask(props) {
     }
 
     //Check if the task is a duplicate
-    for(let i = 0; i < tasks.length; i++){
-      if(tasks[i].title === title){
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].title === title) {
         setTitleValidator('Title already exists!');
-      err = true;
-      setTitleError(true);
+        err = true;
+        setTitleError(true);
       }
     }
-  
   };
 
   return (
     <div>
       {/*Dialog*/}
-        {add ? (
-          <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'white' }}>
-            <AddCircleIcon id="header" />
-            &nbsp; Add Task
-          </DialogTitle>
-        ) : (
-          <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'white' }}>
-            <EditIcon id="header" /> Edit Task
-          </DialogTitle>
-        )}
-        <form>
-          <DialogContent>
-            {/* input fields for title, description, deadline, and priority */}
-            {add && (
-              <TextField
-                label="Title"
-                placeholder="Title"
-                fullWidth
-                error={titleError}
-                helperText={titleValidator}
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            )}
-            <br /> <br />
-            {/*Textfield for Description box*/}
+      {add ? (
+        <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'white' }}>
+          <AddCircleIcon id="header" />
+          &nbsp; Add Task
+        </DialogTitle>
+      ) : (
+        <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'white' }}>
+          <EditIcon id="header" /> Edit Task
+        </DialogTitle>
+      )}
+      <form>
+        <DialogContent>
+          {/* input fields for title, description, deadline, and priority */}
+          {add && (
             <TextField
-              aria-label="minimum height"
-              minRows={3}
-              label="Description"
-              placeholder="Description"
-              error={descriptionError}
-              helperText={descriptionValidator}
+              label="Title"
+              placeholder="Title"
               fullWidth
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              error={titleError}
+              helperText={titleValidator}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
-            <br /> <br />
-            {/*Date Picker*/}
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                margin="dense"
-                label="Deadline"
-                value={deadline}
-                onChange={(newValue) => setDeadline(newValue)}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-            {/*Radio for Priority*/}
-            <br /> <br />
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Priority</FormLabel>
-              <RadioGroup
-                row
-                aria-label="priority"
-                value={priority}
-                onChange={(e) => setPriority(e.target.value)}
-              >
-                <FormControlLabel value="low" control={<Radio />} label="Low" />
-                <FormControlLabel
-                  value="medium"
-                  control={<Radio />}
-                  label="Medium"
-                />
-                <FormControlLabel
-                  value="high"
-                  control={<Radio />}
-                  label="High"
-                />
-              </RadioGroup>
-            </FormControl>
-          </DialogContent>
-          <DialogActions>
-            {add ? (
-              <Button
-                onClick={submitAddTask}
-                variant="contained"
-                sx={{ bgcolor: 'primary.dark', width: '35%' }}
-              >
-                <AddCircleIcon fontSize="small" />
-                &nbsp;Add
-              </Button>
-            ) : (
-              <Button
-                onClick={updateTask}
-                variant="contained"
-                sx={{ bgcolor: 'primary.dark', width: '35%' }}
-              >
-                <EditIcon fontSize="small" />
-                &nbsp;Edit
-              </Button>
-            )}
-            <Button
-              onClick={closeDialog}
-              variant="contained"
-              sx={{ bgcolor: 'red', width: '35%' }}
+          )}
+          <br /> <br />
+          {/*Textfield for Description box*/}
+          <TextField
+            aria-label="minimum height"
+            minRows={3}
+            label="Description"
+            placeholder="Description"
+            error={descriptionError}
+            helperText={descriptionValidator}
+            fullWidth
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <br /> <br />
+          {/*Date Picker*/}
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              margin="dense"
+              label="Deadline"
+              value={deadline}
+              onChange={(newValue) => setDeadline(newValue)}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+          {/*Radio for Priority*/}
+          <br /> <br />
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Priority</FormLabel>
+            <RadioGroup
+              row
+              aria-label="priority"
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}
             >
-              <DoNotDisturbAltIcon fontSize="small" />
-              &nbsp;Cancel
+              <FormControlLabel value="low" control={<Radio />} label="Low" />
+              <FormControlLabel
+                value="medium"
+                control={<Radio />}
+                label="Medium"
+              />
+              <FormControlLabel value="high" control={<Radio />} label="High" />
+            </RadioGroup>
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          {add ? (
+            <Button
+              onClick={submitAddTask}
+              variant="contained"
+              sx={{ bgcolor: 'primary.dark', width: '35%' }}
+            >
+              <AddCircleIcon fontSize="small" />
+              &nbsp;Add
             </Button>
-          </DialogActions>
-        </form>
-
+          ) : (
+            <Button
+              onClick={updateTask}
+              variant="contained"
+              sx={{ bgcolor: 'primary.dark', width: '35%' }}
+            >
+              <EditIcon fontSize="small" />
+              &nbsp;Edit
+            </Button>
+          )}
+          <Button
+            onClick={closeDialog}
+            variant="contained"
+            sx={{ bgcolor: 'red', width: '35%' }}
+          >
+            <DoNotDisturbAltIcon fontSize="small" />
+            &nbsp;Cancel
+          </Button>
+        </DialogActions>
+      </form>
     </div>
   );
 }

@@ -70,8 +70,8 @@ export default class Page extends Component {
 
   //Callback from dialog input to see what next to do
   dialogCallback = (data) => {
-    if(!data){
-      this.handleClose(); 
+    if (!data) {
+      this.handleClose();
       return;
     }
     if (data.action === 'submit') {
@@ -99,10 +99,7 @@ export default class Page extends Component {
   render() {
     return (
       <>
-        <DiaWrap
-          open={this.state.open}
-          onClose={() => this.dialogCallback()}
-        >
+        <DiaWrap open={this.state.open} onClose={() => this.dialogCallback()}>
           <DialogTask
             add={this.state.add}
             index={this.state.index}
@@ -165,6 +162,7 @@ export default class Page extends Component {
                 </TableHead>
                 <TableBody>
                   {this.state.tasks.map((thisTask, index) => {
+                    console.log(thisTask.deadline);
                     return (
                       <TableRow key={thisTask.title}>
                         <TableCell align="center">{thisTask.title}</TableCell>
