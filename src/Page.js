@@ -161,7 +161,6 @@ export default class Page extends Component {
                 </TableHead>
                 <TableBody>
                   {this.state.tasks.map((thisTask, index) => {
-                    console.log(thisTask);
                     return (
                       <TableRow key={thisTask.title}>
                         <TableCell align="center">{thisTask.title}</TableCell>
