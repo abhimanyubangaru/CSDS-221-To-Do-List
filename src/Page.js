@@ -70,6 +70,9 @@ export default class Page extends Component {
 
   //Callback from dialog input to see what next to do
   dialogCallback = (data) => {
+    if(!data){
+      this.handleClose();
+    }
     if (data.action === 'submit') {
       console.log('reached here');
       this.addSuccess();
