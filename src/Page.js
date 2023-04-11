@@ -88,7 +88,7 @@ export default class Page extends Component {
 
   toggleIsComplete = (index) => {
     let newTasks = [...this.state.tasks];
-    newTasks[index]['checked'] = !newTasks[index]['checked'];
+    newTasks[index].checked = !newTasks[index].checked;
     this.setState({ tasks: newTasks });
   };
 
