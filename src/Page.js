@@ -5,7 +5,6 @@ import TableBody from '@mui/material/TableBody';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import DiaWrap from '@mui/material/Dialog';
-import moment from 'moment';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -170,7 +169,7 @@ export default class Page extends Component {
                           {thisTask.description}
                         </TableCell>
                         <TableCell align="center">
-                          {moment(thisTask.deadline).format('MM/DD/YY')}
+                          {new Date(thisTask.deadline).toLocaleDateString('en-US')}
                         </TableCell>
                         <TableCell align="center">
                           {thisTask.priority}
