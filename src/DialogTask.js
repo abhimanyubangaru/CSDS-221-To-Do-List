@@ -68,7 +68,7 @@ export default function DialogTask(props) {
   };
 
   //when hit submit button
-  let submitAddTask = () => {
+  let addTask = () => {
     if (
       !validateDescription() & !validateTitle() &&
       validatePriority() &&
@@ -218,7 +218,7 @@ export default function DialogTask(props) {
         <DialogActions>
           {add ? (
             <Button
-              onClick={submitAddTask}
+              onClick={addTask}
               variant="contained"
               sx={{ bgcolor: 'primary.dark', width: '35%' }}
             >
