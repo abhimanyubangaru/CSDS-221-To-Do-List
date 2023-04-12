@@ -190,7 +190,7 @@ export default function DialogTask(props) {
               label="Deadline"
               value={deadline}
               onChange={(newValue) => setDeadline(newValue)}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => <TextField fullWidth {...params} />}
             />
           </LocalizationProvider>
           {/*Radio for Priority*/}
