@@ -219,6 +219,7 @@ export default function DialogTask(props) {
         </DialogContent>
         <DialogActions>
           {add ? (
+            <div>
             <Button
               onClick={submitAddTask}
               variant="contained"
@@ -227,7 +228,9 @@ export default function DialogTask(props) {
               <AddCircleIcon fontSize="small" />
               &nbsp;Add
             </Button>
+            </div>
           ) : (
+            <div>
             <Button
               onClick={updateTask}
               variant="contained"
@@ -236,6 +239,7 @@ export default function DialogTask(props) {
               <EditIcon fontSize="small" />
               &nbsp;Edit
             </Button>
+            </div>
           )}
           <Button
             onClick={closeDialog}
