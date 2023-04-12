@@ -26,23 +26,23 @@ export default function DialogTask(props) {
   const [add] = useState(props.add);
   let [tasks] = useState(props.tasks);
   const [title, setTitle] = useState(
-    isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index].title
+    initializeState() ? '' : tasks[props.index].title
   );
   const [description, setDescription] = useState(
-    isThisEmpty(tasks) || props.index === -1
+    initializeState()
       ? ''
       : tasks[props.index].description
   );
   const [deadline, setDeadline] = useState(
-    isThisEmpty(tasks) || props.index === -1
+    initializeState()
       ? moment()
       : tasks[props.index].deadline
   );
   const [priority, setPriority] = useState(
-    isThisEmpty(tasks) || props.index === -1 ? '' : tasks[props.index].priority
+    initializeState() ? '' : tasks[props.index].priority
   );
   const [checked, setChecked] = useState(
-    isThisEmpty(tasks) || props.index === -1 ? null : tasks[props.index].checked
+    initializeState() ? null : tasks[props.index].checked
   );
 
   //Validation for title and description
@@ -57,6 +57,10 @@ export default function DialogTask(props) {
     return !item || item.length === 0 || Object.keys(item).length === 0;
   }
 
+  //boolean expression to initialize state of all objects based on update or add
+  function initializeState(){
+    return  isThisEmpty(tasks) || props.index === -1;
+  }
   //when hit the cancel button
   let closeDialog = () => {
     props.parentCallback({
