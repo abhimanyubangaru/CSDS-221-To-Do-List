@@ -113,12 +113,17 @@ export default class Page extends Component {
           <CardHeader
             sx={{ bgcolor: 'primary.dark', color: 'white' }}
             title={
-              <>
-                <span>
-                  <MenuIcon className="svg_icons" id="header" />
-                  FRAMEWORKS
-                </span>
-              </>
+              <div
+            style={{
+              align: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <MenuIcon sx={{ fontSize: '35px', alignItems: 'center' }} />
+            <span>FRAMEWORKS</span>
+          </div>
             }
             style={{ textAlign: 'center' }}
             action={
