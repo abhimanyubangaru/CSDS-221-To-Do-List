@@ -178,7 +178,7 @@ export default class Page extends Component {
                         </TableCell>
                         <TableCell align="center">
                           {new Date(thisTask.deadline).toLocaleDateString(
-                            'en-US'
+                            'en-US',  { month: '2-digit', day: '2-digit', year: '2-digit' }
                           )}
                         </TableCell>
                         <TableCell align="center">

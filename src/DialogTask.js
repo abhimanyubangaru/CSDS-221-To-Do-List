@@ -4,7 +4,7 @@ import React, { Component, useState } from 'react';
 import Button from '@mui/material/Button';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import Dialog from '@mui/material/Dialog';
+import { faBan } from '@fortawesome/free-solid-svg-icons';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -240,7 +240,7 @@ export default function DialogTask(props) {
             variant="contained"
             sx={{ bgcolor: 'red', width: '35%' }}
           >
-            <DoNotDisturbAltIcon fontSize="small" />
+              <FontAwesomeIcon icon={faBan} />
             &nbsp;Cancel
           </Button>
         </DialogActions>
