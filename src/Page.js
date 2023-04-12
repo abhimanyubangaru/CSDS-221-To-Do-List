@@ -17,8 +17,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import EditIcon from '@mui/icons-material/Edit';
-import CancelIcon from '@mui/icons-material/Cancel';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DialogTask from './DialogTask';
