@@ -1,5 +1,8 @@
 import './style.css';
 import React, { Component, useState } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import {faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import CardHeader from '@mui/material/CardHeader';
 import TableBody from '@mui/material/TableBody';
 import Button from '@mui/material/Button';
@@ -205,7 +208,7 @@ export default class Page extends Component {
                                 variant="contained"
                                 sx={{ width: '100' }}
                               >
-                                <EditIcon fontSize="small" />
+                                <FontAwesomeIcon icon={faEdit} />
                                 &nbsp;Update
                               </Button>
                             )}
@@ -224,7 +227,7 @@ export default class Page extends Component {
                               }}
                               sx={{ bgcolor: 'red', width: '100' }}
                             >
-                              <CancelIcon fontSize="small" />
+                              <FontAwesomeIcon icon={faTimesCircle} />
                               &nbsp;Delete
                             </Button>
                         </TableCell>
@@ -236,7 +239,7 @@ export default class Page extends Component {
             </TableContainer>
           </CardContent>
         </Card>
-        {/*TOASTER CONTAINER SO TOASTS CAN DISPLAY */}
+        {/*toaster container*/}
         <ToastContainer
           position="bottom-right"
           autoClose={2500}

@@ -2,6 +2,8 @@ import React from 'react';
 import './style.css';
 import React, { Component, useState } from 'react';
 import Button from '@mui/material/Button';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import {faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -229,7 +231,7 @@ export default function DialogTask(props) {
               variant="contained"
               sx={{ bgcolor: 'primary.dark', width: '35%' }}
             >
-              <EditIcon fontSize="small" />
+              <FontAwesomeIcon icon={faEdit} />
               &nbsp;Edit
             </Button>
           )}
