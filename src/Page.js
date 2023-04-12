@@ -196,7 +196,7 @@ export default class Page extends Component {
                             <Button
                               onClick={() => this.editThisEntry(index)}
                               variant="contained"
-                              sx={{ width: '85%' }}
+                              sx={{ width: '100' }}
                               
                             >
                               <EditIcon fontSize="small" />
@@ -215,7 +215,7 @@ export default class Page extends Component {
                               }));
                               this.deleteSuccess();
                             }}
-                            sx={{ bgcolor: 'red', width: '85%' }}
+                            sx={{ bgcolor: 'red', width: '100' }}
                           >
                             <CancelIcon fontSize="small" />
                             &nbsp;Delete

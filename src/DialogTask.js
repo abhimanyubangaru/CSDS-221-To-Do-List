@@ -22,7 +22,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function DialogTask(props) {
-  //props -> essentially if it is at -1 that means it is add not empty
+  //props -> essentially if it is at -1 that means it is add not update
   const [add] = useState(props.add);
   let [tasks] = useState(props.tasks);
   const [title, setTitle] = useState(
