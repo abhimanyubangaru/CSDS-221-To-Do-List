@@ -22,21 +22,17 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function DialogTask(props) {
-  //props -> essentially if it is at -1 that means it is add not update
+  //props -> essentially if it is at -1 that means it is add not edit
   const [add] = useState(props.add);
   let [tasks] = useState(props.tasks);
   const [title, setTitle] = useState(
     initializeState() ? '' : tasks[props.index].title
   );
   const [description, setDescription] = useState(
-    initializeState()
-      ? ''
-      : tasks[props.index].description
+    initializeState() ? '' : tasks[props.index].description
   );
   const [deadline, setDeadline] = useState(
-    initializeState()
-      ? moment()
-      : tasks[props.index].deadline
+    initializeState() ? moment() : tasks[props.index].deadline
   );
   const [priority, setPriority] = useState(
     initializeState() ? '' : tasks[props.index].priority
@@ -58,8 +54,8 @@ export default function DialogTask(props) {
   }
 
   //boolean expression to initialize state of all objects based on update or add
-  function initializeState(){
-    return  isThisEmpty(tasks) || props.index === -1;
+  function initializeState() {
+    return isThisEmpty(tasks) || props.index === -1;
   }
   //when hit the cancel button
   let closeDialog = () => {
@@ -142,7 +138,7 @@ export default function DialogTask(props) {
         setTitleError(true);
       }
     }
-    return err; 
+    return err;
   };
 
   return (
@@ -219,7 +215,6 @@ export default function DialogTask(props) {
         </DialogContent>
         <DialogActions>
           {add ? (
-            <div>
             <Button
               onClick={submitAddTask}
               variant="contained"
@@ -228,9 +223,7 @@ export default function DialogTask(props) {
               <AddCircleIcon fontSize="small" />
               &nbsp;Add
             </Button>
-            </div>
           ) : (
-            <div>
             <Button
               onClick={updateTask}
               variant="contained"
@@ -239,7 +232,6 @@ export default function DialogTask(props) {
               <EditIcon fontSize="small" />
               &nbsp;Edit
             </Button>
-            </div>
           )}
           <Button
             onClick={closeDialog}

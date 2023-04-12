@@ -169,7 +169,9 @@ export default class Page extends Component {
                           {thisTask.description}
                         </TableCell>
                         <TableCell align="center">
-                          {new Date(thisTask.deadline).toLocaleDateString('en-US')}
+                          {new Date(thisTask.deadline).toLocaleDateString(
+                            'en-US'
+                          )}
                         </TableCell>
                         <TableCell align="center">
                           {thisTask.priority}
@@ -191,35 +193,35 @@ export default class Page extends Component {
                             />
                           )}
                         </TableCell>
-                        <TableCell align="center">
-                          {!thisTask.checked && (
+                        <TableCell align="center" >
+                            {!thisTask.checked && (
+                              <Button
+                                onClick={() => this.editThisEntry(index)}
+                                variant="contained"
+                                sx={{ width: '100' }}
+                              >
+                                <EditIcon fontSize="small" />
+                                &nbsp;Update
+                              </Button>
+                            )}
+                            <br></br>
                             <Button
-                              onClick={() => this.editThisEntry(index)}
+                              color="error"
                               variant="contained"
-                              sx={{ width: '100' }}
-                              
+                              onClick={() => {
+                                this.setState((prevState) => ({
+                                  tasks: [
+                                    ...prevState.tasks.slice(0, index),
+                                    ...prevState.tasks.slice(index + 1),
+                                  ],
+                                }));
+                                this.deleteSuccess();
+                              }}
+                              sx={{ bgcolor: 'red', width: '100' }}
                             >
-                              <EditIcon fontSize="small" />
-                              &nbsp;Update
+                              <CancelIcon fontSize="small" />
+                              &nbsp;Delete
                             </Button>
-                          )}
-                          <Button
-                            color="error"
-                            variant="contained"
-                            onClick={() => {
-                              this.setState((prevState) => ({
-                                tasks: [
-                                  ...prevState.tasks.slice(0, index),
-                                  ...prevState.tasks.slice(index + 1),
-                                ],
-                              }));
-                              this.deleteSuccess();
-                            }}
-                            sx={{ bgcolor: 'red', width: '100' }}
-                          >
-                            <CancelIcon fontSize="small" />
-                            &nbsp;Delete
-                          </Button>
                         </TableCell>
                       </TableRow>
                     );
