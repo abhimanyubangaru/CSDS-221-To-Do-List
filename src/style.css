@@ -10,6 +10,6 @@ p {
   vertical-align: middle;
 }
 
-.red-icon {
-  color: red;
+.svg_icons {
+  transform: scale(1.07);
 }

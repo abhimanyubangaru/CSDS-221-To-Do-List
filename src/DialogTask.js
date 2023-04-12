@@ -138,6 +138,7 @@ export default function DialogTask(props) {
         setTitleError(true);
       }
     }
+    return err; 
   };
 
   return (
@@ -184,6 +185,7 @@ export default function DialogTask(props) {
           {/*Date Picker*/}
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
+              fullWidth
               margin="dense"
               label="Deadline"
               value={deadline}
